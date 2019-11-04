@@ -1,0 +1,45 @@
+@require "akcolor.styl"
+
+body
+  margin: 0
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+
+.navbar
+  background-color: $ak-color-Y75
+  height: 60px
+  display: flex
+  justify-content: space-between
+  line-height: 60px
+  .left, .right
+    background-color: $ak-color-Y100
+    padding: 0 20px
+
+.content
+  display: flex
+  justify-content: space-around
+  align-items: center
+  height: 120vh
+  #first, #second, #third
+    height: 100vh
+    background-color: $ak-color-Y100
+    flex: 0 1 400px
+    padding: 20px
+.center
+  display: flex
+  border: 5px solid $ak-color-R100
+  justify-content: center
+  height: 400px
+  align-items: center
+  margin-bottom: 20px
+  .item
+    img
+      width: 300px
+
+.footer
+  background-color: $ak-color-Y75
+  height: 60px
+  display: flex
+  justify-content: center
+  align-items: center
+  .link
+    margin-left: 20px

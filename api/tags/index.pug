@@ -1,0 +1,357 @@
+extends ../../layout.pug
+
+mixin output
+  .code.output
+    pre
+      block
+
+mixin auth
+  h3 Requirements
+  ul 
+    li 
+      h4 Authentication
+      div With no auth, should return
+      :code(javascript)
+        401 Unauthorized
+
+mixin offset
+  h3 Parameters
+  .param ?offset=<span>NUMBER</span>
+  p Offsets the responses by a set number.
+
+mixin topSubpaths(path, entity)
+  h3 Subpaths
+  ul 
+    li 
+      .path!=  '/' + path + '/top/<span>day</span>'
+      p= 'Only returns ' + entity + ' within the last day.'
+    li 
+      .path!=  '/' + path + '/top/<span>week</span>'
+      p= 'Only returns ' + entity + ' within the last week.'
+    li 
+      .path!=  '/' + path + '/top/<span>month</span>'
+      p= 'Only returns ' + entity + ' within the last month.'
+    li 
+      .path!=  '/' + path + '/top/<span>year</span>'
+      p= 'Only returns ' + entity + ' within the last year.'
+
+
+block content
+  link(href='posts.styl' rel='stylesheet')
+  script(type='text/javascript' src='posts.js')
+  h1 Tags api
+  .courseContent
+    .endpoint
+      h2 <span>GET</span> /tags/:tag
+      p.
+        Should return 100 posts that have the specified tag, sorted by the upvotes from the associated postTag, within a time span between now and the requesting user's last login, 
+        or 24 hours, whichever is longer. The date for the tags is the date the postTag association was first created.
+
+      +auth
+
+      +offset
+
+
+      h3 Example response
+      :code(javascript)
+        {
+          posts: [
+            {
+              "title": "test post", 
+              "url": "non.io/this_is_crazy", 
+              "user": "wombodombo",
+              "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+              "score": 89,
+              "date": "2018-02-14 8:43pm",
+              "content": "img.non.io/fullres/this_is_crazy.jpg",
+              "type": "image",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 89,
+                  "downvotes": 0,
+                  "date": "2018-02-14 8:43pm"
+                }
+              ]
+            }, 
+            {
+              "title": "So and so gets elected", 
+              "url": "non.io/So and so gets elected", 
+              "user": "mrWilson",
+              "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
+              "score": 132,
+              "date": "2018-02-14 10:02pm",
+              "content": "Some longform writing content blah blah blah...",
+              "type": "blog",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 57,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:02pm"
+                },
+                {
+                  "tag": "meme",
+                  "upvotes": 40,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:24pm"
+                },
+                {
+                  "tag": "image",
+                  "upvotes": 35,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:41pm"
+                }
+              ]
+            }, 
+
+            ...etc
+
+          ]
+        }
+
+    .endpoint
+      h2 <span>GET</span> /tags/:tag/top
+      p.
+        Should return 100 posts that match a certain tag, sorted by the upvotes on the associated postTag
+
+      +auth
+      +offset
+      +topSubpaths('tags/:tag', 'posts with postTags created')
+
+      h3 Example response
+      :code(javascript)
+        {
+          posts: [
+            {
+              "title": "test post", 
+              "url": "non.io/this_is_crazy", 
+              "user": "wombodombo",
+              "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+              "score": 322,
+              "date": "2016-11-14 8:43pm",
+              "content": "img.non.io/fullres/this_is_crazy.jpg",
+              "type": "image",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 322,
+                  "downvotes": 0,
+                  "date": "2016-11-14 8:43pm"
+                }
+              ]
+            }, 
+            {
+              "title": "So and so gets elected", 
+              "url": "non.io/So and so gets elected", 
+              "user": "wombodombo",
+              "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
+              "score": 132,
+              "date": "2018-02-14 10:02pm",
+              "content": "Some longform writing content blah blah blah...",
+              "type": "blog",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 57,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:02pm"
+                },
+                {
+                  "tag": "meme",
+                  "upvotes": 40,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:24pm"
+                },
+                {
+                  "tag": "image",
+                  "upvotes": 35,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:41pm"
+                }
+              ]
+            }, 
+
+            ...etc
+
+          ]
+        }
+
+    .endpoint
+      h2 <span>GET</span> /tags/:tag/new
+      p.
+        Should return 100 posts that match a certain tag, sorted by creation date of the associated postTag. 
+      
+      +auth
+      +offset
+
+      h3 Example response
+      :code(javascript)
+        {
+          posts: [
+            {
+              "title": "So and so gets elected", 
+              "url": "non.io/So and so gets elected", 
+              "user": "wombodombo",
+              "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
+              "score": 132,
+              "date": "2016-12-11 1:02pm",
+              "content": "Some longform writing content blah blah blah...",
+              "type": "blog",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 57,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                },
+                {
+                  "tag": "meme",
+                  "upvotes": 40,
+                  "downvotes": 0,
+                  "date": "2016-12-11 1:02pm"
+                },
+                {
+                  "tag": "image",
+                  "upvotes": 35,
+                  "downvotes": 0,
+                  "date": "2016-12-14 4:22pm"
+                }
+              ]
+            }, 
+            {
+              "title": "test post", 
+              "url": "non.io/this_is_crazy", 
+              "user": "wombodombo",
+              "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+              "score": 322,
+              "date": "2018-02-14 10:43pm",
+              "content": "img.non.io/fullres/this_is_crazy.jpg",
+              "type": "image",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 322,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:43pm"
+                }
+              ]
+            },
+            
+            ...etc
+
+          ]
+        }
+
+
+    .endpoint
+      h2 <span>GET</span> /tags/
+      p.
+        Should return 100 tags, sorted by number of postTags for that tag that have been created between now and the requesting user's last login, or one month, whichever is longer. The number of postTags for that tag should be populated into the "count" field. 
+      
+      +auth
+      +offset
+
+      h3 Example response
+      :code(javascript)
+        {
+          tags: [
+            {
+              "name": "funny", 
+              "createdBy": "mrWilson",
+              "admins": [
+                "jimboslice", "dolores68", "choppaChunka"
+              ],
+              "createdDate": "2018-02-13 1:02pm",
+              "count": 28
+            },
+            {
+              "name": "news", 
+              "createdBy": "phildawg",
+              "admins": [
+                "jimboslice", "dolores68", "choppaChunka"
+              ],
+              "createdDate": "2018-02-11 11:28am"
+              "count": 22
+            },
+            
+            ...etc
+
+          ]
+        }
+
+
+    .endpoint
+      h2 <span>GET</span> /tags/top
+      p.
+        Should return 100 tags, sorted by number of postTags for that tag. The number of postTags for that tag should be populated into the "count" field. 
+      
+      +auth
+      +offset
+      +topSubpaths('tags', 'tags')
+
+      h3 Example response
+      :code(javascript)
+        {
+          tags: [
+            {
+              "name": "politics", 
+              "createdBy": "mrWilson",
+              "admins": [
+                "jimboslice", "dolores68", "choppaChunka"
+              ],
+              "createdDate": "2016-02-13 1:02pm",
+              "count": 2838
+            },
+            {
+              "name": "news", 
+              "createdBy": "phildawg",
+              "admins": [
+                "jimboslice", "dolores68", "choppaChunka"
+              ],
+              "createdDate": "2018-02-11 11:28am"
+              "count": 2231
+            },
+
+            ...etc
+
+          ]
+        }
+
+
+    .endpoint
+      h2 <span>GET</span> /tags/new
+      p.
+        Should return 100 tags, sorted by creation date. The number of postTags for that tag should be populated into the "count" field. 
+      
+      +auth
+      +offset
+
+      h3 Example response
+      :code(javascript)
+        {
+          tags: [
+            {
+              "name": "dota2memes", 
+              "createdBy": "mrWilson",
+              "admins": [
+                "jimboslice", "dolores68", "choppaChunka"
+              ],
+              "createdDate": "2018-02-14 10:02pm",
+              "count": 1
+            },
+            {
+              "name": "counterstrike", 
+              "createdBy": "phildawg",
+              "admins": [
+                "jimboslice", "dolores68", "choppaChunka"
+              ],
+              "createdDate": "2018-02-14 10:01pm",
+              "count": 2
+            },
+
+            ...etc
+
+          ]
+        }
+

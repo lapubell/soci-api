@@ -1,0 +1,11 @@
+mixin container
+  .container(style!=attributes.style)
+    if block
+      block
+    else
+      | no sock, no stocking, no sock sock sock :(
+
+
++container(style="background-color: lightblue; width: 100px; height: 100px")
++container(style="border: 2px solid pink; width: 200px; height: 200px")
+  p sock, sock, sock, sock, sock, stocking, sock, sock

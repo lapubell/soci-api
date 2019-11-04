@@ -1,0 +1,19 @@
+extends ../../layout.pug
+
+mixin output
+  .code.output
+    pre
+      block
+
+
+block content
+  h1 PostTags api
+  .courseContent
+    .endpoint
+      h2 <span>POST</span>/postTags/:post/:tag/create
+      p.
+        Creates a tag for a specific post. A vote from the user who created it should also be created. If the tag doesn't exist, a tag should be created as well with the user as the creator. 
+
+      +auth
+
+

@@ -1,0 +1,215 @@
+extends ../../layout.pug
+
+mixin output
+  .code.output
+    pre
+      block
+
+mixin auth
+  h3 Requirements
+  ul 
+    li 
+      h4 Authentication
+      div With no auth, should return
+      :code(javascript)
+        401 Unauthorized
+
+mixin offset
+  h3 Parameters
+  .param ?offset=<span>NUMBER</span>
+  p Offsets the responses by a set number.
+
+mixin topSubpaths(path, entity)
+  h3 Subpaths
+  ul 
+    li 
+      .path!=  '/' + path + '/top/<span>day</span>'
+      p= 'Only returns ' + entity + ' within the last day.'
+    li 
+      .path!=  '/' + path + '/top/<span>week</span>'
+      p= 'Only returns ' + entity + ' within the last week.'
+    li 
+      .path!=  '/' + path + '/top/<span>month</span>'
+      p= 'Only returns ' + entity + ' within the last month.'
+    li 
+      .path!=  '/' + path + '/top/<span>year</span>'
+      p= 'Only returns ' + entity + ' within the last year.'
+
+
+block content
+  h1 Comments api
+  .courseContent
+    .endpoint
+      h2 <span>GET</span> /comments/post/:post
+      p.
+        Should return all of the comments for a post. Comments should be arranged in a parent-child relationship, where only the top level comments (comments whose "parent" is null) are in the root of the array. Comments at the same level of hierarchy should be sorted by (upvotes - downvotes). 
+
+      h3 Example response
+      :code(javascript)
+        {
+          "comments": [
+            {
+              "id": "YPGpbT",
+              "date": "2018-02-14 10:44pm",
+              "post": "non.io/this_is_crazy", 
+              "type": "text",
+              "content": null,
+              "text": "I really like this",
+              "user": "bojackson",
+              "upvotes": 144,
+              "downvotes": 38,
+              "parent": null,
+              "children": [
+                {
+                  "id": "E2j2aa",
+                  "date": "2018-02-14 10:48pm",
+                  "post": "non.io/this_is_crazy", 
+                  "type": "text",
+                  "content": null,
+                  "text": "I hate it and you suck",
+                  "user": "ninnymo",
+                  "upvotes": 22,
+                  "downvotes": 68,
+                  "parent": "YPGpbT",
+                  "children": null
+                }
+              ]
+            },
+            {
+              "id": "qc33cG",
+              "date": "2018-02-14 10:22pm",
+              "post": "non.io/this_is_crazy", 
+              "type": "image",
+              "content": "img.non.io/comments/qc33cG.jpg",
+              "text": "This reminds me of this pic",
+              "user": "mamadisco",
+              "upvotes": 42,
+              "downvotes": 7,
+              "parent": null,
+              "children": null
+            },
+
+            ...etc
+
+          ]
+        }
+
+    .endpoint
+      h2 <span>GET</span> /comments/comment/:comment
+      p.
+        Should return a comment and all of its descendants, plus a parent comment if it exists. Child comments and other descendants should be arranged in a parent-child relationship. Comments at the same level of hierarchy should be sorted by (upvotes - downvotes). 
+
+      h3 Example response
+      :code(javascript)
+        {
+          "comments": [
+            {
+              "id": "YPGpbT",
+              "date": "2018-02-14 10:44pm",
+              "post": "non.io/this_is_crazy", 
+              "type": "text",
+              "content": null,
+              "text": "I really like this",
+              "user": "bojackson",
+              "upvotes": 144,
+              "downvotes": 38,
+              "parent": {
+                "id": "f4ciaC6",
+                "date": "2018-02-14 10:40pm",
+                "post": "non.io/this_is_crazy", 
+                "type": "text",
+                "content": null,
+                "text": "Here's a related <a href='i.imgur.com/44892jf.jpg'>thing i made</a>",
+                "user": "butters",
+                "upvotes": 422,
+                "downvotes": 68,
+                "parent": null
+              },
+              "children": [
+                {
+                  "id": "E2j2aa",
+                  "date": "2018-02-14 10:48pm",
+                  "post": "non.io/this_is_crazy", 
+                  "type": "text",
+                  "content": null,
+                  "text": "I hate it and you suck",
+                  "user": "ninnymo",
+                  "upvotes": 22,
+                  "downvotes": 68,
+                  "parent": "YPGpbT",
+                  "children": [
+                    {
+                      "id": "qc33cG",
+                      "date": "2018-02-14 10:54pm",
+                      "post": "non.io/this_is_crazy", 
+                      "type": "text",
+                      "content": null,
+                      "text": "Don't be mean dude",
+                      "user": "mamadisco",
+                      "upvotes": 42,
+                      "downvotes": 7,
+                      "parent": "E2j2aa",
+                      "children": null
+                    }
+                  ]
+                }
+              ]
+            },
+
+            ...etc
+
+          ]
+        }
+
+    .endpoint
+      h2 <span>GET</span> /comments/user/:user
+      p.
+        Should return 100 comments for a user along with their parent comment (if it exists), sorted by date (most recent first). No child comments should be loaded.
+
+      +offset
+
+      h3 Example response
+      :code(javascript)
+        {
+          "comments": [
+            {
+              "id": "YPGpbT",
+              "date": "2018-02-14 10:44pm",
+              "post": "non.io/this_is_crazy", 
+              "type": "text",
+              "content": null,
+              "text": "I really like this",
+              "user": "bojackson",
+              "upvotes": 144,
+              "downvotes": 38,
+              "parent": null
+            },
+            {
+              "id": "qc33cG",
+              "date": "2018-01-10 1:23pm",
+              "post": "non.io/pic_i_took_at_sunset", 
+              "type": "image",
+              "content": "img.non.io/comments/qc33cG.jpg",
+              "text": "kinda reminds me of this pic",
+              "user": "bojackson",
+              "upvotes": 42,
+              "downvotes": 7,
+              "parent": {
+                "id": "E2j2aa",
+                "date": "2018-01-10 1:42pm",
+                "post": "non.io/pic_i_took_at_sunset", 
+                "type": "text",
+                "content": null,
+                "text": "Does anyone have any related stuff?",
+                "user": "ninnymo",
+                "upvotes": 122,
+                "downvotes": 68,
+                "parent": null,
+              }
+            },
+
+            ...etc
+
+          ]
+        }
+

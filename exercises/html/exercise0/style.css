@@ -1,0 +1,10 @@
+h1 { color: red; }
+
+div > h1 { color: green; }
+
+div { 
+  background-color: gray;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,393 @@
+extends ../../layout.pug
+
+mixin output
+  .code.output
+    pre
+      block
+
+
+block content
+  link(href='posts.styl' rel='stylesheet')
+  script(type='text/javascript' src='posts.js')
+  h1 Posts api
+  .courseContent
+    .endpoint
+      h2 <span>GET</span> /posts/:url
+      p.
+        Returns the data for a single post, referenced by its url.
+        The date for the tags is the date the postTag association was first created.
+
+      h3 Requirements
+      p None. Should be available publicly 
+
+      h3 Example response
+      :code(javascript)
+        {
+          "title": "test post", 
+          "url": "non.io/this_is_crazy", 
+          "user": "wombodombo",
+          "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+          "score": 148,
+          "date": "2018-02-14 8:43pm",
+          "content": "img.non.io/fullres/this_is_crazy.jpg",
+          "type": "image",
+          "tags": [
+            {
+              "tag": "funny",
+              "upvotes": 92,
+              "downvotes": 0,
+              "date": "2018-02-14 8:43pm"
+            },
+            {
+              "tag": "meme",
+              "upvotes": 38,
+              "downvotes": 0,
+              "date": "2018-02-14 10:44pm"
+            },
+            {
+              "tag": "image",
+              "upvotes": 18,
+              "downvotes": 0,
+              "date": "2018-02-14 10:44pm"
+            }
+        } 
+
+    .endpoint
+      h2 <span>GET</span> /posts
+      p.
+        Should return 100 posts sorted by score, within a time span between now and the requesting user's last login, 
+        or 24 hours, whichever is longer. 
+      h3 Parameters
+      .param ?offset=<span>NUMBER</span>
+      p Offsets the responses by a set number.
+
+      h3 Requirements
+      ul 
+        li 
+          h4 Authentication
+          div With no auth, should return
+          :code(javascript)
+            401 Unauthorized
+
+      h3 Example response
+      :code(javascript)
+        {
+          posts: [
+            {
+              "title": "test post", 
+              "url": "non.io/this_is_crazy", 
+              "user": "wombodombo",
+              "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+              "score": 148,
+              "date": "2018-02-14 8:43pm",
+              "content": "img.non.io/fullres/this_is_crazy.jpg",
+              "type": "image",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 8:43pm"
+                },
+                {
+                  "tag": "meme",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                },
+                {
+                  "tag": "image",
+                  "upvotes": 18,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+              ]
+            }, 
+            {
+              "title": "So and so gets elected", 
+              "url": "non.io/So and so gets elected", 
+              "user": "mrWilson",
+              "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
+              "score": 132,
+              "date": "2018-02-14 10:02pm",
+              "content": "Some longform writing content blah blah blah...",
+              "type": "blog",
+              "tags": [
+                {
+                  "tag": "news",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:02pm"
+                },
+                {
+                  "tag": "politics",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+              ]
+            }, 
+
+            ...etc
+
+          ]
+        }
+
+
+    .endpoint
+      h2 <span>GET</span> /posts/new
+      p.
+        Should return the most recent 100 posts, sorted by date. 
+      h3 Parameters
+      .param ?offset=<span>NUMBER</span>
+      p Offsets the responses by a set number.
+
+      h3 Requirements
+      ul 
+        li 
+          h4 Authentication
+          div With no auth, should return
+          :code(javascript)
+            401 Unauthorized
+
+      h3 Example response
+      :code(javascript)
+        {
+          posts: [
+            {
+              "title": "test post", 
+              "url": "non.io/this_is_crazy", 
+              "user": "mrWilson",
+              "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+              "score": 4,
+              "date": "2018-02-14 8:43pm",
+              "content": "img.non.io/fullres/this_is_crazy.jpg",
+              "type": "image",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 8:43pm"
+                },
+                {
+                  "tag": "meme",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                },
+                {
+                  "tag": "image",
+                  "upvotes": 18,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+              ]
+            }, 
+            {
+              "title": "So and so gets elected", 
+              "url": "non.io/So and so gets elected", 
+              "user": "mrWilson",
+              "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
+              "score": 3,
+              "date": "2018-02-14 8:42pm",
+              "content": "Some longform writing content blah blah blah...",
+              "type": "blog",
+              "tags": [
+                {
+                  "tag": "news",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 8:42pm"
+                },
+                {
+                  "tag": "politics",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+              ]
+            }, 
+
+            ...etc
+
+          ]
+        }
+
+
+    .endpoint
+      h2 <span>GET</span> /posts/top
+      p.
+        Should return 100 posts sorted by score, highest score first
+
+      h3 Subpaths
+      ul 
+        li 
+          .path /posts/top/<span>day</span>
+          p Only returns posts within the last day.
+        li 
+          .path /posts/top/<span>week</span>
+          p Only returns posts within the last week.
+        li 
+          .path /posts/top/<span>month</span>
+          p Only returns posts within the last month.
+        li 
+          .path /posts/top/<span>year</span>
+          p Only returns posts within the last year.
+
+      h3 Parameters
+      .param ?offset=<span>NUMBER</span>
+      p Offsets the responses by a set number.
+
+      h3 Requirements
+      ul 
+        li 
+          h4 Authentication
+          div With no auth, should return
+          :code(javascript)
+            401 Unauthorized
+
+      h3 Example response
+      :code(javascript)
+        {
+          posts: [
+            {
+              "title": "test post", 
+              "url": "non.io/this_is_crazy", 
+              "user": "mrWilson",
+              "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+              "score": 1482,
+              "date": "2017-02-14 8:43pm",
+              "content": "img.non.io/fullres/this_is_crazy.jpg",
+              "type": "image",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 8:43pm"
+                },
+                {
+                  "tag": "meme",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                },
+                {
+                  "tag": "image",
+                  "upvotes": 18,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+            }, 
+            {
+              "title": "So and so gets elected", 
+              "url": "non.io/So and so gets elected", 
+              "user": "mrWilson",
+              "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
+              "score": 1328,
+              "date": "2018-02-14 8:42pm",
+              "content": "Some longform writing content blah blah blah...",
+              "type": "blog",
+              "tags": [
+                {
+                  "tag": "news",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 8:42pm"
+                },
+                {
+                  "tag": "politics",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+              ]
+            }, 
+
+            ...etc
+
+          ]
+        }
+
+
+    .endpoint
+      h2 <span>GET</span> /posts/user/:user
+      p.
+        Should return 100 posts created by a specific user.
+      h3 Parameters
+      .param ?offset=<span>NUMBER</span>
+      p Offsets the responses by a set number.
+
+      h3 Requirements
+      ul 
+        li 
+          h4 Authentication
+          div With no auth, should return
+          :code(javascript)
+            401 Unauthorized
+
+      h3 Example response
+      :code(javascript)
+        {
+          posts: [
+            {
+              "title": "test post", 
+              "url": "non.io/this_is_crazy", 
+              "user": "lapubell",
+              "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
+              "score": 148,
+              "date": "2018-02-14 8:43pm",
+              "content": "img.non.io/fullres/this_is_crazy.jpg",
+              "type": "image",
+              "tags": [
+                {
+                  "tag": "funny",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 8:43pm"
+                },
+                {
+                  "tag": "meme",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                },
+                {
+                  "tag": "image",
+                  "upvotes": 18,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+              ]
+            }, 
+            {
+              "title": "So and so gets elected", 
+              "url": "non.io/So and so gets elected", 
+              "user": "lapubell",
+              "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
+              "score": 132,
+              "date": "2018-02-14 10:02pm",
+              "content": "Some longform writing content blah blah blah...",
+              "type": "blog",
+              "tags": [
+                {
+                  "tag": "news",
+                  "upvotes": 92,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:02pm"
+                },
+                {
+                  "tag": "politics",
+                  "upvotes": 38,
+                  "downvotes": 0,
+                  "date": "2018-02-14 10:44pm"
+                }
+              ]
+            }, 
+
+            ...etc
+
+          ]
+        }
+

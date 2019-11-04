@@ -1,0 +1,116 @@
+@require '../styles/akvariables.styl'
+
+#sidebar
+  height: 100%
+  background-color: transparent
+  position:fixed
+  top:0
+  left:0
+  transition: left 0.3s $ak-ease
+  display: flex
+  user-select: none
+  #sidebar-left
+    z-index: 3
+    background-color: $ak-color-NA40
+    width: 64px
+    height: 100%
+    .logo
+      margin: 16px auto 
+      width:  42px
+      height: 42px
+      background-image: url('../images/logo.png')
+      background-size: contain
+      background-repeat: no-repeat
+      background-position: center center
+      &:hover
+        filter: brightness(70%)
+  #sidebar-right
+    padding: 20px
+    overflow-y: auto
+    background-color: $ak-color-NA60
+    transition: max-width 0.3s
+    width: 250px
+
+
+    &.close
+      max-width: 0
+      padding: 0
+      transition: max-width 0.3s
+      
+  #collapser
+    width: 3px
+    &:hover
+      background-color: $ak-color-B100
+      cursor: ew-resize
+  #collapser-button-holder
+    height: 30%
+    #collapser-button
+      height: 40px
+      width: 40px
+      //background-color: $ak-color-NA40
+      //border : 1px solid $ak-color-LB
+      border-radius: 50%
+      margin-top: 12px
+      margin-left: 6px
+      color: $ak-color-LB
+      font-size: 22px
+      padding: 7px 11px
+      opacity : 0
+      transition: opacity 0.2s 
+      cursor: pointer
+      &.show
+        opacity: 1
+        transition: opacity 0.2s
+      &:hover
+        //color: $ak-color-B100 
+        //border-color : $ak-color-B100 
+        background-color: $ak-color-NA40
+      .back-icon
+        margin: 0 auto 
+        margin-top: 2px
+        margin-left: -2px
+        width:  20px
+        height: 20px
+        background-image: url('../images/back-icon.png')
+        background-size: contain
+        background-repeat: no-repeat
+        background-position: center center
+      .collapse-icon
+        margin: 0 auto 
+        margin-top: 3px
+        margin-left: -1px
+        width:  20px
+        height: 20px
+        background-image: url('../images/back-icon.png')
+        background-size: contain
+        background-repeat: no-repeat
+        background-position: center center
+        &.forward
+          transform: scaleX(-1)
+.lesson-holder
+  h3
+    font-weight: bold
+    margin-left: 10px
+    margin-top: 0
+    margin-bottom: 6px
+    font-size: 12px
+    text-transform: uppercase
+    color: $ak-color-LB
+    opacity: 0.7
+  .lesson
+    border-radius: 4px
+    padding: 5px 10px 5px 10px
+    cursor: pointer
+    &:hover,&.selected
+      background-color: $ak-color-NA100
+      a
+        color:white
+        display: block
+    
+    a
+      color: $ak-color-LB
+    .course
+      text-transform: uppercase
+      opacity: 0.6
+      font-size: 10px
+      line-height: 10px

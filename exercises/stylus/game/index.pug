@@ -1,0 +1,25 @@
+link(href='style.styl' rel='stylesheet')
+
+#goal
+  img(src='goal.jpg')
+#info
+  #timer 00:00
+  #score 0 Points
+  #level Level 1
+#blanket.on
+#ball.level0
+  img(src='ball.jpg')
+#modal.on
+  p
+    | The goal of this game is to use the inspect tool to position the #ball element into the goal.
+    | Each level will get more difficult and the time given to complete it will be shorter.
+    br
+    br
+    | Make sure you select the outer #ball div and not the inner img element.
+    | The whole ball needs to inside of the net to be considered a goal.
+    br
+    br
+    | Good luck!
+  .button Play!
+
+script(src='script.js' type='text/javascript')

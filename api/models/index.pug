@@ -1,0 +1,100 @@
+extends ../../layout.pug
+
+block content
+  h1 Models
+  .courseContent.models
+    .endpoint
+      h2 Post
+      :code(javascript)
+        post: {
+          title: String,
+          url: String,
+          user: 'user',
+          thumbnail: String,
+          score: Number,
+          date: Date,
+          content: String,
+          type: String,
+          tags: Array('postTag')
+        }
+    .endpoint
+      h2 User
+      :code(javascript)
+        user: {
+          username: String,
+          balance: Number,
+          contribution: Number,
+          subscription: Date,
+          email: String,
+          accountConfirmed: Boolean,
+          password: String,
+          password_change_request_hash: String
+        }
+    .endpoint
+      h2 PostTag
+      :code(javascript)
+        postTag: {
+          tag: 'tag',
+          post: 'post',
+          upvotes: Number,
+          downvotes: Number,
+          date: Date
+        }
+    .endpoint
+      h2 Tag
+      :code(javascript)
+        tag: {
+          name: String,
+          createdBy: 'user',
+          createdDate: Date
+        }
+    .endpoint
+      h2 Vote
+      :code(javascript)
+        userVote: {
+          post: 'post',
+          tag: 'tag',
+          user: 'user',
+          date: Date,
+          positive: Boolean
+        }
+    .endpoint
+      h2 Comment
+      :code(javascript)
+        comment: {
+          post: 'post',
+          type: String,
+          content: String,
+          text: String,
+          user: 'user',
+          upvotes: Number,
+          downvotes: Number,
+          parent: 'comment'
+          children: Array('comment')
+        }
+    .endpoint
+      h2 CommentVote
+      :code(javascript)
+        commentVote: {
+          comment: 'comment',
+          post: 'post',
+          user: 'user',
+          date: Date,
+          positive: Boolean
+        }
+    .endpoint
+      h2 PostReport
+      :code(javascript)
+        postReport: {
+          post: 'post',
+          fromUser: 'user',
+          reportedUser: 'user',
+          post: 'post',
+          comment: 'comment',
+          reasonNotOC: Boolean,
+          reasonIllegal: Boolean,
+          reason: String
+        }
+
+
+

@@ -1,0 +1,6 @@
+mixin ak-proto-modal
+  .ak-proto-modal-container&attributes(attributes)
+    .ak-proto-modal.z200
+      if block
+        block
+    .ak-proto-modal-blanket(onclick='this.parentElement.classList.remove("active")')
