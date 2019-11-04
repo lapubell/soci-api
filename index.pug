@@ -3,41 +3,9 @@ script(src="prism.js")
 meta(name='viewport' content='width=device-width initial-scale=1.0 maximum-scale=1.0')
 link(href='styles/style.styl' rel='stylesheet')
 
-
 #content
-  
-  include api/models/index.pug
-  include api/posts/index.pug
-  include api/tags/index.pug
-  include api/comments/index.pug
-  include api/postTags/index.pug
-
-    // Second prototype. Should incorporate CSS 104 / CSS 105 / Pug 102 lessons
-    //
-      li
-        a(href='#') Proto 102 - Making a design look real
-
-    // border-radius, box-shadow, border
-    //// should bring up draw performance in this, since animating the spread of box-shadow is very gpu intensive and will drop frames.
-    //// Also should bring up the dangers of animating border sizes (which is why we're mentioning border again)
-    //
-      li
-        a(href='lessons/css107') CSS 107 - Borders and shadows
-
-
-    /// CSS Attributes still needed:
-
-    // cursor
-    // overflow
-    // animation / keyframes
-    // box-sizing
-    // list-style
-    // table styles
-    // max-width, min-width, max-height, min-height
-    // media queries / responsive design
-    // pseudo-elements
-    // opacity
-    // transform
-
-
-script(type='text/javascript' src='prototype.js')
+  include api/models.pug
+  include api/posts.pug
+  include api/tags.pug
+  include api/comments.pug
+  include api/postTags.pug

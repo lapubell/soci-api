@@ -1,0 +1,24 @@
+{
+  "name": "soci-api",
+  "version": "1.0.0",
+  "description": "Just a simple server to host the api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjcm/soci-api.git"
+  },
+  "author": "Jake Miller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jjcm/soci-api/issues"
+  },
+  "homepage": "https://github.com/jjcm/soci-api#readme",
+  "dependencies": {
+    "mime-types": "^2.1.24",
+    "pug": "^2.0.4",
+    "stylus": "^0.54.7"
+  }
+}
