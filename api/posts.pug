@@ -8,19 +8,50 @@ block content
   h1 Posts api
   .courseContent
     .endpoint
-      h2 <span>GET</span> /posts/:url
+      h2 <span>POST</span> /post/create
       p.
-        Returns the data for a single post, referenced by its url.
-        The date for the tags is the date the postTag association was first created.
+        [IN API] - Accepts a JSON payload to create a new post in the database
 
       h3 Requirements
-      p None. Should be available publicly 
+      ul
+        li
+          h4 Authentication
+          div With no auth, should return
+          :code(javascript)
+            401 Unauthorized
+
+      h3 Example payload
+      :code(javascript)
+        {
+          "title": "My Cool Post!",
+          "content": "This is the long form content for this post...",
+          "type": "blog"
+        }
 
       h3 Example response
       :code(javascript)
         {
-          "title": "test post", 
-          "url": "non.io/this_is_crazy", 
+            "title": "My Cool Post!",
+            "user": "lapubell",
+            "time": "2019-11-04 04:11PM",
+            "url": "my-cool-post",
+            "tags": []
+        }
+
+    .endpoint
+      h2 <span>GET</span> /posts/:url
+      p.
+        [IN API] - Returns the data for a single post, referenced by its url.
+        The date for the tags is the date the postTag association was first created.
+
+      h3 Requirements
+      p None. Should be available publicly
+
+      h3 Example response
+      :code(javascript)
+        {
+          "title": "test post",
+          "url": "non.io/this_is_crazy",
           "user": "wombodombo",
           "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
           "score": 148,
@@ -46,20 +77,20 @@ block content
               "downvotes": 0,
               "date": "2018-02-14 10:44pm"
             }
-        } 
+        }
 
     .endpoint
       h2 <span>GET</span> /posts
       p.
-        Should return 100 posts sorted by score, within a time span between now and the requesting user's last login, 
-        or 24 hours, whichever is longer. 
+        [IN API] - Should return 100 posts sorted by score, within a time span between now and the requesting user's last login,
+        or 24 hours, whichever is longer.
       h3 Parameters
       .param ?offset=<span>NUMBER</span>
       p Offsets the responses by a set number.
 
       h3 Requirements
-      ul 
-        li 
+      ul
+        li
           h4 Authentication
           div With no auth, should return
           :code(javascript)
@@ -70,8 +101,8 @@ block content
         {
           posts: [
             {
-              "title": "test post", 
-              "url": "non.io/this_is_crazy", 
+              "title": "test post",
+              "url": "non.io/this_is_crazy",
               "user": "wombodombo",
               "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
               "score": 148,
@@ -98,10 +129,10 @@ block content
                   "date": "2018-02-14 10:44pm"
                 }
               ]
-            }, 
+            },
             {
-              "title": "So and so gets elected", 
-              "url": "non.io/So and so gets elected", 
+              "title": "So and so gets elected",
+              "url": "non.io/So and so gets elected",
               "user": "mrWilson",
               "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
               "score": 132,
@@ -122,7 +153,7 @@ block content
                   "date": "2018-02-14 10:44pm"
                 }
               ]
-            }, 
+            },
 
             ...etc
 
@@ -133,14 +164,14 @@ block content
     .endpoint
       h2 <span>GET</span> /posts/new
       p.
-        Should return the most recent 100 posts, sorted by date. 
+        [IN API] - Should return the most recent 100 posts, sorted by date.
       h3 Parameters
       .param ?offset=<span>NUMBER</span>
       p Offsets the responses by a set number.
 
       h3 Requirements
-      ul 
-        li 
+      ul
+        li
           h4 Authentication
           div With no auth, should return
           :code(javascript)
@@ -151,8 +182,8 @@ block content
         {
           posts: [
             {
-              "title": "test post", 
-              "url": "non.io/this_is_crazy", 
+              "title": "test post",
+              "url": "non.io/this_is_crazy",
               "user": "mrWilson",
               "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
               "score": 4,
@@ -179,10 +210,10 @@ block content
                   "date": "2018-02-14 10:44pm"
                 }
               ]
-            }, 
+            },
             {
-              "title": "So and so gets elected", 
-              "url": "non.io/So and so gets elected", 
+              "title": "So and so gets elected",
+              "url": "non.io/So and so gets elected",
               "user": "mrWilson",
               "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
               "score": 3,
@@ -203,7 +234,7 @@ block content
                   "date": "2018-02-14 10:44pm"
                 }
               ]
-            }, 
+            },
 
             ...etc
 
@@ -217,17 +248,17 @@ block content
         Should return 100 posts sorted by score, highest score first
 
       h3 Subpaths
-      ul 
-        li 
+      ul
+        li
           .path /posts/top/<span>day</span>
           p Only returns posts within the last day.
-        li 
+        li
           .path /posts/top/<span>week</span>
           p Only returns posts within the last week.
-        li 
+        li
           .path /posts/top/<span>month</span>
           p Only returns posts within the last month.
-        li 
+        li
           .path /posts/top/<span>year</span>
           p Only returns posts within the last year.
 
@@ -236,8 +267,8 @@ block content
       p Offsets the responses by a set number.
 
       h3 Requirements
-      ul 
-        li 
+      ul
+        li
           h4 Authentication
           div With no auth, should return
           :code(javascript)
@@ -248,8 +279,8 @@ block content
         {
           posts: [
             {
-              "title": "test post", 
-              "url": "non.io/this_is_crazy", 
+              "title": "test post",
+              "url": "non.io/this_is_crazy",
               "user": "mrWilson",
               "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
               "score": 1482,
@@ -275,10 +306,10 @@ block content
                   "downvotes": 0,
                   "date": "2018-02-14 10:44pm"
                 }
-            }, 
+            },
             {
-              "title": "So and so gets elected", 
-              "url": "non.io/So and so gets elected", 
+              "title": "So and so gets elected",
+              "url": "non.io/So and so gets elected",
               "user": "mrWilson",
               "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
               "score": 1328,
@@ -299,7 +330,7 @@ block content
                   "date": "2018-02-14 10:44pm"
                 }
               ]
-            }, 
+            },
 
             ...etc
 
@@ -316,8 +347,8 @@ block content
       p Offsets the responses by a set number.
 
       h3 Requirements
-      ul 
-        li 
+      ul
+        li
           h4 Authentication
           div With no auth, should return
           :code(javascript)
@@ -328,8 +359,8 @@ block content
         {
           posts: [
             {
-              "title": "test post", 
-              "url": "non.io/this_is_crazy", 
+              "title": "test post",
+              "url": "non.io/this_is_crazy",
               "user": "lapubell",
               "thumbnail": "img.non.io/thumbnails/f3c34da.jpg",
               "score": 148,
@@ -356,10 +387,10 @@ block content
                   "date": "2018-02-14 10:44pm"
                 }
               ]
-            }, 
+            },
             {
-              "title": "So and so gets elected", 
-              "url": "non.io/So and so gets elected", 
+              "title": "So and so gets elected",
+              "url": "non.io/So and so gets elected",
               "user": "lapubell",
               "thumbnail": "img.non.io/thumbnails/3d8efa5.jpg",
               "score": 132,
@@ -380,7 +411,7 @@ block content
                   "date": "2018-02-14 10:44pm"
                 }
               ]
-            }, 
+            },
 
             ...etc
 
