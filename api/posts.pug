@@ -80,6 +80,25 @@ block content
         }
 
     .endpoint
+      h2 <span>GET</span> /posts/url-is-available/:url
+      p.
+        [IN API] - Returns a boolean based on if the requested URL is available
+
+      h3 Requirements
+      ul
+        li
+          h4 Authentication
+          div With no auth, should return
+          :code(javascript)
+            401 Unauthorized
+
+
+      h3 Example response
+      :code(javascript)
+        true
+
+
+    .endpoint
       h2 <span>GET</span> /posts
       p.
         [IN API] - Should return 100 posts sorted by score, within a time span between now and the requesting user's last login,
