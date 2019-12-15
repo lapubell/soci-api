@@ -1,0 +1,28 @@
+block content
+  h1 API Endpoint Quick Reference
+  .apiReference.groups
+    .group
+      h3 Open Routes
+      :code(html)
+        GET  "/"
+        POST "/register"
+        POST "/login"
+        POST "/login-social"
+        POST "/login-social/callback" (used for the different social auth providers, shouldn't be used directly)
+        GET  "/info"
+        GET  "/posts/"
+        GET  "/posts/url-is-available/"
+        GET  "/users/username-is-available/"
+    .group
+      h3 Protected Routes
+      :code(html)
+        GET  "/protected"
+        POST "/posts/new"
+        GET  "/posts/top"
+        GET  "/posts/top/day"
+        GET  "/posts/top/week"
+        GET  "/posts/top/month"
+        GET  "/posts/top/year"
+        GET  "/posts"
+        POST "/post/create"
+        GET  "/tags"

@@ -1,7 +1,7 @@
 @require 'atlassian.styl'
 @require 'akvariables.styl'
 
-$sidebar_width= 314px 
+$sidebar_width= 314px
 
 body
   margin: 0
@@ -34,7 +34,7 @@ body
 
 h2
   span
-    padding: 0 8px 
+    padding: 0 8px
     border-radius: 3px;
     background-color: #496180
     color: #9dc4f7
@@ -49,7 +49,7 @@ a
   color: $ak-color-B100
   &:hover
     color: $ak-color-B300
-    
+
 c
   font-family: monospace
   background: $ak-color-NA60
@@ -58,13 +58,13 @@ c
 
 p
   opacity: 0.8
-  
+
 img
   width: 100%
 
 *
   box-sizing: border-box
-  
+
 #content
   margin-left: $sidebar_width + 200px
   margin-right: 200px
@@ -73,14 +73,14 @@ img
   transition: margin-left 0.3s
   &.expand
     margin-left: 200px
-    transition: margin-left 0.3s 
+    transition: margin-left 0.3s
   &.no-sidebar
     margin-left: 200px
-  
+
 
 .quote
   font-size: 28px
-  font-family: georgia 
+  font-family: georgia
   font-style: italic
   line-height: 40px
   padding: 0 48px
@@ -112,7 +112,7 @@ pre.blur
 
   &-thumb
     background-color: $ak-color-NA200
-    
+
   &-corner
     background-color: $ak-color-NA50
 
@@ -263,7 +263,7 @@ td
     > li
       margin-bottom: 40px
 
-      
+
 
 label.code
   display: block
@@ -304,14 +304,14 @@ label.code
       margin-right: 14px
   .column
     width: 50%
-    
+
 .table-holder
   margin-bottom: 24px
   cursor: pointer
   width: 100%
   //margin-left: calc(-20%)
   overflow-x: auto
-  
+
 table
   max-width: 100%
   border-spacing: 0
@@ -320,7 +320,7 @@ table
   font-weight: 300
   margin-bottom:0
   margin-top: 20px
-  background-color: $ak-color-NA50 
+  background-color: $ak-color-NA50
   td, th
     padding: 4px 12px
     border-bottom: 2px solid rgba(255,255,255,0.1)
@@ -339,7 +339,7 @@ table
   display: flex
   .col:first-child
     margin-right: 20px
-  .col 
+  .col
     min-width: 50%
     margin-bottom: 20px
     margin-top: 0
@@ -348,7 +348,7 @@ table
     > h4:first-child
       margin-top: 0
     overflow-x: auto
-    
+
 
   img.left
     width: 400px
@@ -356,7 +356,7 @@ table
 
 .pop-quiz
   border-top: 3px solid $ak-color-Y300
-  background-color: $ak-color-NA50 
+  background-color: $ak-color-NA50
   color: white
   box-sizing: content-box
   padding: 12px
@@ -375,6 +375,16 @@ table
   width: 100%
   flex-wrap: wrap
   .endpoint
+    min-width: 350px
+    margin-right: 24px
+    flex: 1
+    margin-bottom: 24px
+
+.apiReference.groups
+  display: flex
+  width: 100%
+  flex-wrap: wrap
+  .group
     min-width: 350px
     margin-right: 24px
     flex: 1
